@@ -4,11 +4,17 @@ import psycopg2.extras
 # Client class manesta3mlouha ken bech njibou mel base 
 #add tsir b class okhra ok
 class Client: #Client / ClientInDb / BaseClient
-    def __init__(self, firstname, lastname):
+    def __init__(self, firstname, lastname , id = None):
         assert firstname, "first name lezem ykoun mch none"
         assert isinstance(lastname, str), "first name lezem ykoun int"
         self.firstname = firstname
         self.lastname = lastname
+        self.__id = id
+        print("Welcome")
+
+    @property
+    def id(self):
+        return self.__id
 
     def add_user_in_db(self):
         conn = psycopg2.connect(dbname="bankapp", 
@@ -28,4 +34,4 @@ class Client: #Client / ClientInDb / BaseClient
         return self.firstname + "/" + self.lastname
 
     def __repr__(self) -> str:
-        return self.firstname + " - " + self.lastname
+        return self.firstname + " - " + self.lastname + " - " + (str)(self.id)
